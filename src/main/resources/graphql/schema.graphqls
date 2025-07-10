@@ -1,0 +1,39 @@
+type Promotion {
+    id: ID!
+    title: String!
+    description: String!
+    discount: Float!
+    startDate: String!
+    endDate: String!
+    purchases: [Purchase!]
+}
+
+type Purchase {
+    id: ID!
+    customerName: String!
+    quantity: Int!
+    purchaseDate: String!
+    promotion: Promotion!
+}
+
+type Query {
+    allPromotions: [Promotion]
+    promotionById(id: ID!): Promotion
+}
+
+type Mutation {
+    addPromotion(
+        title: String!,
+        description: String!,
+        discount: Float!,
+        startDate: String!,
+        endDate: String!
+    ): Promotion
+
+    createPurchase(
+        promotionId: ID!,
+        customerName: String!,
+        quantity: Int!,
+        purchaseDate: String!
+    ): Purchase
+}
